@@ -320,7 +320,6 @@ turn_on(light):-
 turn_on(Thing):-
   have(battery),
   have(Thing),
-  have(battery),
   turn_on2(Thing).
 turn_on(Thing):-
   respond(['You don''t have all the items']).
@@ -340,6 +339,7 @@ turn_on2(Thing):-
 % turn_off - I didn't feel like implementing turn_off
 
 turn_off(_):-
+  
   respond(['I lied about being able to turn things off']).
 
 % The only special puzzle in Nani Search has to do with going to the
