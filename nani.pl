@@ -324,6 +324,7 @@ turn_on(Thing):-
   turn_on2(Thing).
 turn_on(Thing):-
   respond(['You don''t have all the items']).
+  
 
 turn_on2(Thing):-
   turned_on(Thing),
