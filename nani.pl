@@ -323,8 +323,8 @@ turn_on(Thing):-
   have(battery),
   turn_on2(Thing).
 turn_on(Thing):-
-  inventory,
-  respond(['You don't have all the items']).
+  respond(['You don't have all the items']),
+  inventory().
 
 turn_on2(Thing):-
   turned_on(Thing),
