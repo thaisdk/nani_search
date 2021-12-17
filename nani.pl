@@ -1,4 +1,3 @@
-@ -1,547 +0,0 @@
 % NANI SEARCH - A sample adventure game
 % with small modifications in the code available at
 % http://www.amzi.com/AdventureInProlog/appendix.php
@@ -324,7 +323,7 @@ turn_on(Thing):-
   have(battery),
   turn_on2(Thing).
 turn_on(Thing):-
-  respond(['You don't have all the items']).
+  respond(['You don''t have all the items']).
 
 turn_on2(Thing):-
   turned_on(Thing),
