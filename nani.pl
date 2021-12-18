@@ -7,7 +7,7 @@
 % is an implementation of the principle example used in
 % this tutorial.
 
-:- dynamic have/1, location/2, here/1, turned_off/1, turned_on/1, hasEat/1.
+:- dynamic have/1, location/2, here/1, turned_off/1, turned_on/1.
 
 main:- nani_search.       % main entry point
 
@@ -267,6 +267,7 @@ move(Thing,have):-
   retract(location(Thing,_)),      % take it from its old place
   asserta(have(Thing)).            % and add to your possessions
 
+
 % drop - allows the player to transfer a possession to a room
 
 drop(Thing):-
@@ -290,9 +291,11 @@ eat2(Thing):-
   edible(Thing),
   retract(have(Thing)),
   respond(['That ',Thing,' was good']).
+
 eat2(Thing):-
   tastes_yuchy(Thing),
   respond(['Three year olds don''t eat ',Thing]).
+
 eat2(Thing):-
   respond(['You can''t eat a ',Thing]).
 
@@ -340,8 +343,10 @@ turn_on2(Thing):-
 % turn_off - I didn't feel like implementing turn_off
 
 turn_off(_):-
-  
-  respond(['I lied about being able to turn things off']).
+  asserta(turned_off(Thing)),
+  retract(turned_on(Thing)),
+  respond([Thing,' turned off']).
+
 
 % The only special puzzle in Nani Search has to do with going to the
 % cellar.  Puzzle is only called from goto for this reason.  Other
@@ -458,7 +463,7 @@ noun(go_place,'dining room') --> [dining,room].
 
 noun(thing,T) --> [T], {location(T,_)}.
 noun(thing,T) --> [T], {have(T)}.
-noun(thing,T) --> [T], {hasEat(T)}. % Verifcar se o jogador já comeu
+% noun(thing,T) --> [T], {belly(T)}. % Verifcar se o jogador já comeu
 noun(thing,flashlight) --> [flash,light].
 noun(thing, soap)  --> [soap].
 noun(thing,'washing machine') --> [washing,machine].
