@@ -162,7 +162,8 @@ init_dynamic_facts:-
   assertz(location(battery, wardrobe)),
   assertz(location(sink, bathroom)),
   assertz(here(kitchen)),
-  assertz(turned_off(flashlight)).
+  assertz(turned_off(flashlight)),
+  assertz(turned_off(shower)).
 
 furniture(desk).
 furniture('washing machine').
@@ -185,7 +186,8 @@ tastes_yuchy(broccoli).
 goto(Room):-
   can_go(Room),                 % check for legal move
   puzzle(goto(Room)), 
-  puzzle2(goto(Room)),           
+  puzzle2(goto(Room)),    
+  puzzle3(goto(Room)),                  
   moveto(Room),                 % go there and tell the player
   look.
 goto(_):- look.
@@ -325,6 +327,8 @@ turn_on(Thing):-
   have(battery),
   have(Thing),
   turn_on2(Thing).
+turn_on(shower):-
+  turn_on2(shower).
 turn_on(Thing):-
   respond(['You don''t have all the items']).
   
@@ -342,7 +346,7 @@ turn_on2(Thing):-
 
 % turn_off - I didn't feel like implementing turn_off
 
-turn_off(_):-
+turn_off(Thing):-
   asserta(turned_off(Thing)),
   retract(turned_on(Thing)),
   respond([Thing,' turned off']).
@@ -373,6 +377,12 @@ puzzle2(goto(cellar)):-
 puzzle2(_).
 
 
+puzzle3(goto(office)):-
+  turned_off(shower),!.
+puzzle3(goto(office)):-
+  write('You should turn off the shower before leave'),nl,
+  !,fail.
+puzzle3(_).
 % respond simplifies writing a mixture of literals and variables
 
 respond([]):-
