@@ -7,7 +7,7 @@
 % is an implementation of the principle example used in
 % this tutorial.
 
-:- dynamic have/1, location/2, here/1, turned_off/1, turned_on/1.
+:- dynamic have/1, location/2, here/1, turned_off/1, turned_on/1, hasEat/1.
 
 main:- nani_search.       % main entry point
 
@@ -184,7 +184,8 @@ tastes_yuchy(broccoli).
 
 goto(Room):-
   can_go(Room),                 % check for legal move
-  puzzle(goto(Room)),           % check for special conditions
+  puzzle(goto(Room)), 
+  puzzle2(goto(Room)),           
   moveto(Room),                 % go there and tell the player
   look.
 goto(_):- look.
@@ -349,7 +350,6 @@ puzzle(turn_on(flashlight)):-
   have(flashlight),
   have(battery),
   turned_on(flashlight), !.
-
 puzzle(goto(cellar)):-
   have(flashlight),
   turned_on(flashlight),!.
@@ -358,6 +358,15 @@ puzzle(goto(cellar)):-
   write('cellar, and you''re afraid of the dark.'),nl,
   !,fail.
 puzzle(_).
+
+%OBS , não implementado com broccoli, e não implementado SE o usuário comeu, apenas se a comida está em sua mochila 
+puzzle2(goto(cellar)):-
+  have(apple) ; have(crackers),!. % ";"  equivalente à OU
+puzzle2(goto(cellar)):-
+  write('You''re too hungry to take the stairs'),nl,
+  !,fail.
+puzzle2(_).
+
 
 % respond simplifies writing a mixture of literals and variables
 
@@ -449,6 +458,7 @@ noun(go_place,'dining room') --> [dining,room].
 
 noun(thing,T) --> [T], {location(T,_)}.
 noun(thing,T) --> [T], {have(T)}.
+noun(thing,T) --> [T], {hasEat(T)}. % Verifcar se o jogador já comeu
 noun(thing,flashlight) --> [flash,light].
 noun(thing, soap)  --> [soap].
 noun(thing,'washing machine') --> [washing,machine].
