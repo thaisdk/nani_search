@@ -158,7 +158,7 @@ init_dynamic_facts:-
   assertz(location(broccoli,kitchen)),
   assertz(location(soap, bathroom)),
   assertz(location(shower, bathroom)),
-  
+  assertz(location(toilet, bathroom)),
   assertz(location(battery, wardrobe)),
   assertz(location(sink, bathroom)),
   assertz(here(kitchen)),
