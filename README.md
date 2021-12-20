@@ -1,6 +1,7 @@
 # Nani Search
 
  Projeto em Prolog baseado no mini-RPG Nani Search criado em Prolog para os alunos de Lógica para Computação do curso de Sistemas de Informação, 2021.1 da Universidade Federal de Pernambuco.
+ <br><br>
  ![Screenshot](https://github.com/thaisdk/nani_search/blob/master/public/img.jpeg)
 
 
