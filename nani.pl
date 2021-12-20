@@ -366,6 +366,7 @@ puzzle(turn_on(flashlight)):-
   turned_on(flashlight), !.
 puzzle(goto(cellar)):-
   have(flashlight),
+  have(battery),
   turned_on(flashlight),!.
 puzzle(goto(cellar)):-
   write('You can''t go to the cellar because it''s dark in the'),nl,
