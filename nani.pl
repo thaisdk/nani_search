@@ -163,7 +163,8 @@ init_dynamic_facts:-
   assertz(location(sink, bathroom)),
   assertz(here(kitchen)),
   assertz(turned_off(flashlight)),
-  assertz(turned_off(shower)).
+  assertz(turned_off(shower)),
+  assertz(eat_something(none)).
 
 furniture(desk).
 furniture('washing machine').
@@ -292,6 +293,7 @@ eat(Thing):-
 eat2(Thing):-
   edible(Thing),
   retract(have(Thing)),
+  asserta(eat_something(Thing)),
   respond(['That ',Thing,' was good']).
 
 eat2(Thing):-
@@ -370,7 +372,9 @@ puzzle(_).
 
 %OBS , não implementado com broccoli, e não implementado SE o usuário comeu, apenas se a comida está em sua mochila 
 puzzle2(goto(cellar)):-
-  have(apple) ; have(crackers),!. % ";"  equivalente à OU
+  % itsfull(True),
+  eat_something(apple); eat_something(crackers),!.
+  % have(apple) ; have(crackers),!. % ";"  equivalente à OU
 puzzle2(goto(cellar)):-
   write('You''re too hungry to take the stairs'),nl,
   !,fail.
