@@ -326,9 +326,12 @@ list_possessions.
 turn_on(light):-
   respond(['You can''t reach the switch and there''s nothing to stand on']).
 turn_on(Thing):-
-  have(battery),
   have(Thing),
   turn_on2(Thing).
+turn_on(flashlight):-
+  have(battery),
+  have(flashlight),
+  turn_on2(flashlight).
 turn_on(shower):-
   turn_on2(shower).
 turn_on(Thing):-
